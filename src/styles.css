@@ -1,0 +1,23 @@
+
+.colorTransition {
+    animation: fadeInAnimation ease 2s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 1;
+}
+
+.colorTransitionEmpty {
+    opacity: 0;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 1600px;
+    }
+    100% {
+        width: 0%;
+     }
+}
