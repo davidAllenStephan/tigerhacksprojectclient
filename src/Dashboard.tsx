@@ -1,36 +1,13 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import { Button, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 import './styles.css'
-
-interface AppBarProps extends MuiAppBarProps {
-    open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-        transition: theme.transitions.create(['width', 'margin'], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
-    }),
-}));
+import Header from './Header';
 
 export interface MovieResults {
     poster_path: string
@@ -46,28 +23,21 @@ interface DashboardProps {
     selectedMovieResults: MovieResults
     imageSelected: any
     setImageSelcted: any
+    setUserLikedMovies: any
+    userLikedMovies: any
 }
 
-export default function Dashboard({ selectedMovieResults, imageSelected, setImageSelcted }: DashboardProps) {
+export default function Dashboard({ selectedMovieResults, imageSelected, setImageSelcted, setUserLikedMovies, userLikedMovies }: DashboardProps) {
+
+    const likeMovie = () => {
+        setImageSelcted(imageSelected + 1)
+        userLikedMovies.push(selectedMovieResults)
+        setUserLikedMovies(userLikedMovies)
+    }
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-            <AppBar position="absolute" sx={{ backgroundColor: "#FE6D73" }}>
-                <Container maxWidth="xl">
-                    <Toolbar disableGutters>
-                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex', gap: '100px', justifyContent: 'center', alignItems: 'center' } }}>
-                            {['Popular', 'Up and Coming', 'Hot', 'New'].map((page) => (
-                                <Button
-                                    key={page}
-                                    sx={{ color: "white", fontSize: 20 }}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
-                        </Box>
-                    </Toolbar>
-                </Container>
-            </AppBar>
             <Box
                 component="main"
                 sx={{
@@ -85,8 +55,8 @@ export default function Dashboard({ selectedMovieResults, imageSelected, setImag
                         </IconButton>
                     </Grid>
                     <Grid item xs={8}>
-                        <div className='colorTransition' style={{ zIndex: 100, backgroundColor: "green", position: "absolute", width: "1600px", height: "950px" }}>
-                        </div>
+                        {/*<div className='colorTransition' style={{ zIndex: 100, backgroundColor: "green", position: "absolute", width: "1600px", height: "950px" }}>
+                        </div>*/}
                         <Paper sx={{ paddingTop: "50px", paddingBottom: "50px" }}>
                             <Grid container height="100%" gap={0}>
                                 <Grid item xs={6} height="100%">
@@ -97,6 +67,7 @@ export default function Dashboard({ selectedMovieResults, imageSelected, setImag
                                         height="70%"
                                         style={{ marginLeft: "125px" }}
                                     />
+
                                 </Grid>
                                 <Grid item xs={6}>
                                     <div style={{ textAlign: "center" }}>
@@ -113,7 +84,7 @@ export default function Dashboard({ selectedMovieResults, imageSelected, setImag
                         </Paper>
                     </Grid>
                     <Grid item xs={2}>
-                        <IconButton onClick={() => setImageSelcted(imageSelected + 1)} sx={{ marginLeft: "130px" }}>
+                        <IconButton onClick={() => likeMovie()} sx={{ marginLeft: "130px" }}>
                             <SentimentSatisfiedAltIcon sx={{ height: "100px", width: "100px", color: "green" }} />
                         </IconButton>
                     </Grid>
