@@ -69,6 +69,9 @@ function App() {
     return (
         <div className="App">
             <Header selectedList={selectedList} setSelectedList={setSelectedList} setImageSelected={setImageSelcted} />
+            <br/>
+            <br/>
+            <br/>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Dashboard selectedMovieResults={selectedMovieResults} imageSelected={imageSelected} setImageSelcted={setImageSelcted} setUserLikedMovies={setUserLikedMovies} userLikedMovies={userLikedMovies} />} />

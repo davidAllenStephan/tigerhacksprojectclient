@@ -79,11 +79,16 @@ const Qualities = ({ userLikedMovies }) => {
             <br />
             <br />
             <br />
+            <h1 style={{ fontSize: 50, textAlign: "center" }}>Total Liked Movies</h1>
+            <h1 style={{ textAlign: "center" }}>{userLikedMovies.length}</h1>
+            <br />
+            <br />
+            <br />
             <br />
             <br />
             <Grid container gap={30}>
                 <Grid item>
-                    <h1 style={{ fontSize: 50 }}>Top Three Genres</h1>
+                    <h1 style={{ fontSize: 50 }}>Your Top Three Genres</h1>
                     {
                         determineFavoriteGenre().map((genre, i) => {
                             return (
@@ -93,12 +98,12 @@ const Qualities = ({ userLikedMovies }) => {
                     }
                 </Grid>
                 <Grid item>
-                    <h1 style={{ fontSize: 50 }}>Top Three Rated Movies</h1>
+                    <h1 style={{ fontSize: 50 }}>Your Top Three Rated Movies</h1>
                     {
                         determineHighestRatedMovies().map((movie, i) => {
                             return (
                                 <div>
-                                    <h2 style={{ fontSize: 30, textAlign: "left" }}>{i + 1}. {movie.title}-------{movie.rating} rating</h2>
+                                    {movie ? <h2 style={{ fontSize: 30, textAlign: "left" }}>{i + 1}. {movie.title}-------{movie.rating} rating</h2> : null}
                                 </div>
 
                             )

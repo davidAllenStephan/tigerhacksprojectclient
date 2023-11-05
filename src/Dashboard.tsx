@@ -42,8 +42,6 @@ export default function Dashboard({ selectedMovieResults, imageSelected, setImag
 
     const navigate = useNavigate();
 
-
-
     const likeMovie = () => {
         setImageSelcted(imageSelected + 1)
         userLikedMovies.push(selectedMovieResults)
@@ -51,71 +49,84 @@ export default function Dashboard({ selectedMovieResults, imageSelected, setImag
     }
 
     return (
-        <Box sx={{ display: 'flex' }}>
-            <CssBaseline />
-            <Box
-                component="main"
-                sx={{
-                    backgroundColor: "#FEF9EF",
-                    flexGrow: 1,
-                    height: '100vh',
-                    overflow: 'auto',
-                }}
-            >
-                <Toolbar />
-                <Grid container alignItems="center" justifyContent="center" sx={{ marginTop: "100px" }}>
-                    <Grid item xs={3} sx={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <IconButton onClick={() => setImageSelcted(imageSelected + 1)} sx={{ marginLeft: "130px" }}>
-                            <SentimentVeryDissatisfiedIcon sx={{ height: "100px", width: "100px", color: "red" }} />
-                        </IconButton>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <div style={{ left: 1150, top: 90, borderBottom: "5px solid black", position: "absolute", width: "120px", height: "120px", rotate: "45deg", transformOrigin: "100% 0", zIndex: 200 }}></div>
+        <div>
+            <Box sx={{ display: 'flex' }}>
+                <CssBaseline />
+                <Box
+                    component="main"
+                    sx={{
+                        backgroundColor: "#FEF9EF",
+                        flexGrow: 1,
+                        height: '100vh',
+                        overflow: 'auto',
+                    }}
+                >
+                    <Toolbar />
+                    <Grid container alignItems="center" justifyContent="center" sx={{ marginTop: "100px" }}>
+                        <Grid item xs={3} sx={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                            <div style={{ textAlign: "center", marginRight: "125px" }}>
+                                <IconButton onClick={() => setImageSelcted(imageSelected + 1)} sx={{ marginLeft: "130px" }}>
+                                    <SentimentVeryDissatisfiedIcon sx={{ height: "100px", width: "100px", color: "red" }} />
+                                </IconButton>
+                            </div>
+                            <div style={{ textAlign: "center" }}>DISLIKE</div>
+                        </Grid>
+                        <Grid item xs={6}>
+                            {/*<div style={{ left: 1150, top: 90, borderBottom: "5px solid black", position: "absolute", width: "120px", height: "120px", rotate: "45deg", transformOrigin: "100% 0", zIndex: 200 }}></div>
                         <div style={{ left: 1050, top: 10, borderBottom: "5px solid black", position: "absolute", width: "120px", height: "120px", rotate: "-45deg", transformOrigin: "100% 0", zIndex: 200 }}></div>
-                        <Box sx={{ border: 15 }}>
-                            <Paper sx={{ paddingTop: "50px", paddingBottom: "50px" }}>
-                                <Grid container height="100%" gap={0}>
-                                    <Grid item xs={6} height="100%">
-                                        <img
-                                            src={`https://image.tmdb.org/t/p/w500${selectedMovieResults.poster_path}`}
-                                            alt="new"
-                                            width="70%"
-                                            height="70%"
-                                            style={{ marginLeft: "125px" }}
-                                        />
+                        */}
+                            <Box sx={{ border: 15 }}>
+                                <Paper sx={{ paddingTop: "50px", paddingBottom: "50px" }}>
+                                    <Grid container height="100%" gap={0}>
+                                        <Grid item xs={6} height="100%">
+                                            <img
+                                                src={`https://image.tmdb.org/t/p/w500${selectedMovieResults.poster_path}`}
+                                                alt="new"
+                                                width="60%"
+                                                height="60%"
+                                                style={{ marginLeft: "125px" }}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={6}>
+                                            <div style={{ textAlign: "center" }}>
+                                                <h1 style={{ fontSize: "40px" }}>{selectedMovieResults.original_title}</h1>
+                                            </div>
+                                            <div style={{ marginRight: "30px", fontSize: 17 }}>
+                                                <p>{selectedMovieResults.overview}</p>
+                                            </div>
+                                            <div>
+                                                <h2>Movie Rating {selectedMovieResults.vote_average}</h2>
+                                            </div>
+                                            <div>
+                                                <h2>Genres</h2>
+                                                {
+                                                    getGenres(selectedMovieResults.genre_ids).map((genreName) => (
+                                                        <span style={{ marginRight: 5, fontSize: 20 }}>{genreName}</span>
+                                                    ))
+                                                }
+                                            </div>
+                                        </Grid>
                                     </Grid>
-                                    <Grid item xs={6}>
-                                        <div style={{ textAlign: "center" }}>
-                                            <h1>{selectedMovieResults.original_title}</h1>
-                                        </div>
-                                        <div style={{ marginRight: "30px", fontSize: 23 }}>
-                                            <p>{selectedMovieResults.overview}</p>
-                                        </div>
-                                        <div>
-                                            <h2>Rating {selectedMovieResults.vote_average}</h2>
-                                        </div>
-                                        <div>
-                                            {
-                                                getGenres(selectedMovieResults.genre_ids).map((genreName) => (
-                                                    <span>{genreName}</span>
-                                                ))
-                                            }
-                                        </div>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                        </Box>
+                                </Paper>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <div style={{ textAlign: "center", marginRight: "125px" }}>
+                                <IconButton onClick={() => likeMovie()} sx={{ marginLeft: "130px" }}>
+                                    <SentimentSatisfiedAltIcon sx={{ height: "100px", width: "100px", color: "green" }} />
+                                </IconButton>
+                            </div>
+                            <div style={{ textAlign: "center" }}>LIKE</div>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={3}>
-                        <IconButton onClick={() => likeMovie()} sx={{ marginLeft: "130px" }}>
-                            <SentimentSatisfiedAltIcon sx={{ height: "100px", width: "100px", color: "green" }} />
-                        </IconButton>
-                    </Grid>
-                </Grid>
+                </Box>
+                <div style={{ position: "absolute", left: "90%", top: "10%"}}>
+                    <Button onClick={() => navigate('/review')} size="large" style={{backgroundColor: "red", color: "white"}}>
+                        Go to likes
+                    </Button>
+                </div>
             </Box>
-            <Button onClick={() => navigate('/review')}>
-                Go to review
-            </Button>
-        </Box>
+        </div>
     );
+
 }
