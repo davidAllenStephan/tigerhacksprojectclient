@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Grid from '@mui/material/Grid';
-import { Button, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 import './styles.css'
 import { useState } from 'react';
-import putUserLikedMovies from './api/putUserLikedMovies';
+import Qualities from './Qualities';
 
 interface ReviewProps {
     userLikedMovies: any
@@ -18,7 +18,6 @@ const Review = ({ userLikedMovies }: ReviewProps) => {
     }
     const getMovieTitles = () => {
         const output = [] as Array<String>
-        console.log(userLikedMovies)
         for (let i = 0; i < userLikedMovies.length; i++) {
             output.push(`"` + userLikedMovies[i].original_title + `"`)
         }
@@ -92,9 +91,7 @@ const Review = ({ userLikedMovies }: ReviewProps) => {
                             />
                         </div> : null}
                     </Grid>
-                    <Button onClick={() => putUserLikedMovies('9ddb09ab-877a-4c4a-8a51-6b381935e52d', getMovieTitles())}>
-                        Save
-                    </Button>
+                    <Qualities userLikedMovies={userLikedMovies} />
                 </Grid>
             </Box>
         </Box>

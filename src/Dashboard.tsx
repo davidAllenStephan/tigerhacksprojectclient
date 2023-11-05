@@ -27,22 +27,22 @@ interface DashboardProps {
     setUserLikedMovies: any
     userLikedMovies: any
 }
-
+export const getGenres = (genreIds: Array<number>) => {
+    const myGenre = []
+    for (let i = 0; i < genres.length; i++) {
+        for (let j = 0; j < genreIds.length; j++) {
+            if (genres[i].id == genreIds[j]) {
+                myGenre.push(genres[i].name)
+            }
+        }
+    }
+    return myGenre
+}
 export default function Dashboard({ selectedMovieResults, imageSelected, setImageSelcted, setUserLikedMovies, userLikedMovies }: DashboardProps) {
 
     const navigate = useNavigate();
 
-    const getGenres = (genreIds: Array<number>) => {
-        const myGenre = []
-        for (let i = 0; i < genres.length; i++) {
-            for (let j = 0; j < genreIds.length; j++) {
-                if (genres[i].id === genreIds[j]) {
-                    myGenre.push(genres[i].name)
-                }
-            }
-        }
-        return myGenre
-    }
+
 
     const likeMovie = () => {
         setImageSelcted(imageSelected + 1)
