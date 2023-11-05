@@ -10,16 +10,18 @@ import getNowplayingMovies from './api/getNowplayingMovies';
 import getTopratedMovies from './api/getTopratedMovies';
 import shuffle from './util/shuffle';
 
+export interface imageDataResultsProps {
+    poster_path: string
+    overview: string
+    original_title: string
+    popularity: number
+    vote_average: number
+    vote_count: number
+    genre_ids: Array<number>
+}
+
 function App() {
-    interface imageDataResultsProps {
-        poster_path: string
-        overview: string
-        original_title: string
-        popularity: number
-        vote_average: number
-        vote_count: number
-        genre_ids: Array<number>
-    }
+
     interface imageDataProps {
         results: Array<imageDataResultsProps>
     }
@@ -59,13 +61,18 @@ function App() {
         setSelectedMovieResults({ poster_path: selectedMovieData.poster_path, overview: selectedMovieData.overview, original_title: selectedMovieData.original_title, popularity: selectedMovieData.popularity, vote_average: selectedMovieData.vote_average, vote_count: selectedMovieData.vote_count, genre_ids: selectedMovieData.genre_ids })
     }, [imageSelected])
 
+    useEffect(() => {
+        const selectedMovieData = movieResults.results[imageSelected] as imageDataResultsProps
+        setSelectedMovieResults({ poster_path: selectedMovieData.poster_path, overview: selectedMovieData.overview, original_title: selectedMovieData.original_title, popularity: selectedMovieData.popularity, vote_average: selectedMovieData.vote_average, vote_count: selectedMovieData.vote_count, genre_ids: selectedMovieData.genre_ids })
+    }, [movieResults])
+
     return (
         <div className="App">
             <Header selectedList={selectedList} setSelectedList={setSelectedList} setImageSelected={setImageSelcted} />
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Dashboard selectedMovieResults={selectedMovieResults} imageSelected={imageSelected} setImageSelcted={setImageSelcted} setUserLikedMovies={setUserLikedMovies} userLikedMovies={userLikedMovies} />} />
-                    <Route path="/review" element={<Review />} />
+                    <Route path="/review" element={<Review userLikedMovies={userLikedMovies} />} />
                 </Routes>
             </BrowserRouter>
         </div>

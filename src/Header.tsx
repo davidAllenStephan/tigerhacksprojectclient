@@ -16,19 +16,23 @@ const Header = ({ selectedList, setSelectedList, setImageSelected }: HeaderProps
             case "Popular":
                 setSelectedList('popular')
                 setHeaderColor("#B10F2E")
-               setImageSelected(0)
+                setImageSelected(0)
                 break;
             case "Upcoming":
                 setSelectedList('upcoming')
                 setHeaderColor("#8D6A9F")
+                setImageSelected(0)
                 break;
             case "Now Playing":
                 setSelectedList('nowplaying')
                 setHeaderColor("#71B48D")
+                setImageSelected(0)
                 break;
             case "Top Rated":
                 setSelectedList('toprated')
                 setHeaderColor("#227C9D")
+
+                setImageSelected(0)
                 break;
         }
     }
